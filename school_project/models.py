@@ -9,17 +9,17 @@ class Teacher(models.Model):
     birthday = models.DateField()
 
     def __str__(self):
-        return self.title
+        return self.first_name
     
 
 class Subject(models.Model):
     subject_name = models.CharField(max_length=100)
     bio = models.TextField()
     num_classs = models.IntegerField()
-    teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL)
+    teacher = models.ForeignKey(Teacher, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.subject_name
 
 
 class Student(models.Model):
@@ -33,13 +33,13 @@ class Student(models.Model):
     class_num = models.IntegerField()
 
     def __str__(self):
-        return self.title
+        return self.first_name
     
 
 class Class(models.Model):
     num_class = models.IntegerField()
     floor = models.IntegerField()
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ManyToManyField(Student)
 
     def __str__(self):
-        return self.title
+        return self.num_class
