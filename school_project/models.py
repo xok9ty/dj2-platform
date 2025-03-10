@@ -4,7 +4,7 @@ from django.db import models
 class Teacher(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=15)
     email = models.EmailField()
     birthday = models.DateField()
 
@@ -25,11 +25,10 @@ class Subject(models.Model):
 class Student(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=15)
     email = models.EmailField()
     birthday = models.DateField()
-    home_adress = models.CharField(max_length=200)
-    head_teacher = models.CharField(max_length=100)
+    home_address = models.CharField(max_length=200)
     class_num = models.IntegerField()
 
     def __str__(self):
@@ -38,8 +37,9 @@ class Student(models.Model):
 
 class Class(models.Model):
     num_class = models.IntegerField()
-    floor = models.IntegerField()
+    name_class = models.CharField(max_length=5)
     student = models.ManyToManyField(Student)
+    head_teacher = models.CharField(max_length=100)
 
     def __str__(self):
         return self.num_class
